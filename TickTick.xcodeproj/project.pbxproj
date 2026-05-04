@@ -1,0 +1,412 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1FFF3F9BEAD50D6ACB8FD824 /* Subtask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B09BB6067DFD9FA4AE5484A /* Subtask.swift */; };
+		2C7EC04AFB29D5BD57BC76D7 /* RecurrencePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3785465D10F9E5E695196D18 /* RecurrencePicker.swift */; };
+		38A379BC1F611B4D1FB6413F /* SubtaskSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EA6FBE7C390E5D70392814 /* SubtaskSection.swift */; };
+		3D4FD4D3EB393D6BAE92EA1A /* ListEditSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73344C5D7AA37EE78A31D477 /* ListEditSheet.swift */; };
+		402A0F5333671DCABE4BA407 /* AddTaskBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3E2D777C9EF31C75B4E61E /* AddTaskBar.swift */; };
+		5621F5C20ACF2D2CE0CB44D9 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F9C04A8F8AE3B5E25B1C4B /* Enums.swift */; };
+		6346797A4E27ACF7BD6B32BD /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD48B9357ED0011FCFF4242 /* TaskListView.swift */; };
+		7ABFACCA4EA3EFD4789F2536 /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99799A6BE4EEC2344D5C85CC /* TaskItem.swift */; };
+		8CBE671D36341C9F002C6326 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B13A15705B9FBFF460F6108 /* ContentView.swift */; };
+		90F88E7864AFE226340F489C /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC66655794183A45952D8FF /* SidebarView.swift */; };
+		B7BF3CA9A71999B0046D86D5 /* RecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401BE989223B40AA75F55A44 /* RecurrenceRule.swift */; };
+		BE4FCC4C1C4DF7794C5B16BF /* TickTickApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE7EEFE9661A57EEAF8F49E /* TickTickApp.swift */; };
+		C81050ED45FCA4CD89926B8B /* TaskRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAB4D1D4A559813812F01CD /* TaskRow.swift */; };
+		D03D3078265FF77DB4D57E11 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02C2362D4BC18291756E35A /* Color+Hex.swift */; };
+		D0F0033B6AA9A8EFC1155361 /* TaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB95F5FE0AA8AF144746AF1 /* TaskDetailView.swift */; };
+		E1EBF0F5B42CCD21948BAAFF /* TaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A1385CA000CDF13FE4204A /* TaskList.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0EC66655794183A45952D8FF /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
+		26EA6FBE7C390E5D70392814 /* SubtaskSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtaskSection.swift; sourceTree = "<group>"; };
+		3785465D10F9E5E695196D18 /* RecurrencePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurrencePicker.swift; sourceTree = "<group>"; };
+		3DA4997E77796CA7CA910CC3 /* TickTick.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TickTick.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DB95F5FE0AA8AF144746AF1 /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
+		401BE989223B40AA75F55A44 /* RecurrenceRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurrenceRule.swift; sourceTree = "<group>"; };
+		4B09BB6067DFD9FA4AE5484A /* Subtask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subtask.swift; sourceTree = "<group>"; };
+		5B13A15705B9FBFF460F6108 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		5FD48B9357ED0011FCFF4242 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
+		73344C5D7AA37EE78A31D477 /* ListEditSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListEditSheet.swift; sourceTree = "<group>"; };
+		91A1385CA000CDF13FE4204A /* TaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskList.swift; sourceTree = "<group>"; };
+		99799A6BE4EEC2344D5C85CC /* TaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
+		9E3E2D777C9EF31C75B4E61E /* AddTaskBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskBar.swift; sourceTree = "<group>"; };
+		ADAB4D1D4A559813812F01CD /* TaskRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRow.swift; sourceTree = "<group>"; };
+		C0F9C04A8F8AE3B5E25B1C4B /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		CBE7EEFE9661A57EEAF8F49E /* TickTickApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickTickApp.swift; sourceTree = "<group>"; };
+		E02C2362D4BC18291756E35A /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0AC50A540624769E9B7ACD40 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3DA4997E77796CA7CA910CC3 /* TickTick.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0EC92EACC9C6C61ACB0B0E65 /* TaskDetail */ = {
+			isa = PBXGroup;
+			children = (
+				3785465D10F9E5E695196D18 /* RecurrencePicker.swift */,
+				26EA6FBE7C390E5D70392814 /* SubtaskSection.swift */,
+				3DB95F5FE0AA8AF144746AF1 /* TaskDetailView.swift */,
+			);
+			path = TaskDetail;
+			sourceTree = "<group>";
+		};
+		A78A11BDDDEC2B51125C1EFB /* Sidebar */ = {
+			isa = PBXGroup;
+			children = (
+				73344C5D7AA37EE78A31D477 /* ListEditSheet.swift */,
+				0EC66655794183A45952D8FF /* SidebarView.swift */,
+			);
+			path = Sidebar;
+			sourceTree = "<group>";
+		};
+		BDC7BDA316A2D5E420C0D238 = {
+			isa = PBXGroup;
+			children = (
+				D3330AD3C90887F5736BEDCC /* TickTick */,
+				0AC50A540624769E9B7ACD40 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C987DE248D2DD06288EE9017 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C0F9C04A8F8AE3B5E25B1C4B /* Enums.swift */,
+				401BE989223B40AA75F55A44 /* RecurrenceRule.swift */,
+				4B09BB6067DFD9FA4AE5484A /* Subtask.swift */,
+				99799A6BE4EEC2344D5C85CC /* TaskItem.swift */,
+				91A1385CA000CDF13FE4204A /* TaskList.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CA85DACB147AD9485B5E8BC8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5B13A15705B9FBFF460F6108 /* ContentView.swift */,
+				A78A11BDDDEC2B51125C1EFB /* Sidebar */,
+				0EC92EACC9C6C61ACB0B0E65 /* TaskDetail */,
+				DB3DD53849FA1CBC9ACB49C6 /* TaskList */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D3330AD3C90887F5736BEDCC /* TickTick */ = {
+			isa = PBXGroup;
+			children = (
+				D6DF1BDA5E8D775949303084 /* App */,
+				FA67BF2C0CC3B67C02B11C7D /* Extensions */,
+				C987DE248D2DD06288EE9017 /* Models */,
+				CA85DACB147AD9485B5E8BC8 /* Views */,
+			);
+			path = TickTick;
+			sourceTree = "<group>";
+		};
+		D6DF1BDA5E8D775949303084 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				CBE7EEFE9661A57EEAF8F49E /* TickTickApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		DB3DD53849FA1CBC9ACB49C6 /* TaskList */ = {
+			isa = PBXGroup;
+			children = (
+				9E3E2D777C9EF31C75B4E61E /* AddTaskBar.swift */,
+				5FD48B9357ED0011FCFF4242 /* TaskListView.swift */,
+				ADAB4D1D4A559813812F01CD /* TaskRow.swift */,
+			);
+			path = TaskList;
+			sourceTree = "<group>";
+		};
+		FA67BF2C0CC3B67C02B11C7D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E02C2362D4BC18291756E35A /* Color+Hex.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B60A0BBA579C0D1C2E1C4CE2 /* TickTick */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F84B13D344AEAB70D263877C /* Build configuration list for PBXNativeTarget "TickTick" */;
+			buildPhases = (
+				5DD8BCA9CBDB40264F6C726B /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TickTick;
+			packageProductDependencies = (
+			);
+			productName = TickTick;
+			productReference = 3DA4997E77796CA7CA910CC3 /* TickTick.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		844060867A39837ADDC27B8B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					B60A0BBA579C0D1C2E1C4CE2 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = A9E2E8508128BE85171288ED /* Build configuration list for PBXProject "TickTick" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = BDC7BDA316A2D5E420C0D238;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 0AC50A540624769E9B7ACD40 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B60A0BBA579C0D1C2E1C4CE2 /* TickTick */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5DD8BCA9CBDB40264F6C726B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				402A0F5333671DCABE4BA407 /* AddTaskBar.swift in Sources */,
+				D03D3078265FF77DB4D57E11 /* Color+Hex.swift in Sources */,
+				8CBE671D36341C9F002C6326 /* ContentView.swift in Sources */,
+				5621F5C20ACF2D2CE0CB44D9 /* Enums.swift in Sources */,
+				3D4FD4D3EB393D6BAE92EA1A /* ListEditSheet.swift in Sources */,
+				2C7EC04AFB29D5BD57BC76D7 /* RecurrencePicker.swift in Sources */,
+				B7BF3CA9A71999B0046D86D5 /* RecurrenceRule.swift in Sources */,
+				90F88E7864AFE226340F489C /* SidebarView.swift in Sources */,
+				1FFF3F9BEAD50D6ACB8FD824 /* Subtask.swift in Sources */,
+				38A379BC1F611B4D1FB6413F /* SubtaskSection.swift in Sources */,
+				D0F0033B6AA9A8EFC1155361 /* TaskDetailView.swift in Sources */,
+				7ABFACCA4EA3EFD4789F2536 /* TaskItem.swift in Sources */,
+				E1EBF0F5B42CCD21948BAAFF /* TaskList.swift in Sources */,
+				6346797A4E27ACF7BD6B32BD /* TaskListView.swift in Sources */,
+				C81050ED45FCA4CD89926B8B /* TaskRow.swift in Sources */,
+				BE4FCC4C1C4DF7794C5B16BF /* TickTickApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		069D9389F6D2D6C51972CC7B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		4B944D16B81A7249FCA9E7C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = TickTick;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nickycho.TickTick;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		737C871F06BD7B6680E6AD75 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = TickTick;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nickycho.TickTick;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		DF8C721F10AEF7B1E6D0AC11 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A9E2E8508128BE85171288ED /* Build configuration list for PBXProject "TickTick" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				069D9389F6D2D6C51972CC7B /* Debug */,
+				DF8C721F10AEF7B1E6D0AC11 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F84B13D344AEAB70D263877C /* Build configuration list for PBXNativeTarget "TickTick" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				737C871F06BD7B6680E6AD75 /* Debug */,
+				4B944D16B81A7249FCA9E7C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 844060867A39837ADDC27B8B /* Project object */;
+}
