@@ -124,7 +124,9 @@ struct CalendarDayCell: View {
     let tasks: [TaskItem]
     let isSelected: Bool
     let onTap: () -> Void
+    @AppStorage("taskFontSize") private var taskFontSize: Double = 14
 
+    private var chipFontSize: CGFloat { CGFloat(taskFontSize) - 4 }
     private var isToday: Bool { Calendar.current.isDateInToday(date) }
 
     private var isCurrentMonth: Bool {
@@ -153,7 +155,7 @@ struct CalendarDayCell: View {
                         .fill(task.priority == .none ? Color.accentColor.opacity(0.6) : task.priority.color)
                         .frame(width: 5, height: 5)
                     Text(task.title)
-                        .font(.system(size: 10))
+                        .font(.system(size: chipFontSize))
                         .lineLimit(1)
                         .strikethrough(task.isCompleted)
                         .foregroundStyle(task.isCompleted ? Color.secondary : Color.primary)
@@ -169,7 +171,7 @@ struct CalendarDayCell: View {
             // Overflow indicator
             if tasks.count > 3 {
                 Text("+\(tasks.count - 3) 個")
-                    .font(.system(size: 10))
+                    .font(.system(size: chipFontSize))
                     .foregroundStyle(.secondary)
                     .padding(.leading, 3)
             }

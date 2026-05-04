@@ -26,6 +26,10 @@ struct TickTickApp: App {
                 .keyboardShortcut("n", modifiers: .command)
             }
         }
+
+        Settings {
+            SettingsView()
+        }
     }
 }
 

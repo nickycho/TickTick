@@ -3,6 +3,7 @@ import SwiftUI
 struct TaskRow: View {
     @Bindable var task: TaskItem
     let onComplete: () -> Void
+    @AppStorage("taskFontSize") private var fontSize: Double = 14
 
     var body: some View {
         HStack(spacing: 10) {
@@ -15,6 +16,7 @@ struct TaskRow: View {
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(task.title)
+                    .font(.system(size: CGFloat(fontSize)))
                     .strikethrough(task.isCompleted)
                     .foregroundStyle(task.isCompleted ? Color.secondary : Color.primary)
                     .lineLimit(2)

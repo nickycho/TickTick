@@ -25,9 +25,11 @@
 		D03D3078265FF77DB4D57E11 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02C2362D4BC18291756E35A /* Color+Hex.swift */; };
 		D0F0033B6AA9A8EFC1155361 /* TaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB95F5FE0AA8AF144746AF1 /* TaskDetailView.swift */; };
 		E1EBF0F5B42CCD21948BAAFF /* TaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A1385CA000CDF13FE4204A /* TaskList.swift */; };
+		F7A73DC1A10D653E78D98366 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001CC161EA9A5D8B64799576 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		001CC161EA9A5D8B64799576 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		0EC66655794183A45952D8FF /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		26E7074288B237CFD361C0D7 /* CalendarDayDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDayDetailView.swift; sourceTree = "<group>"; };
 		26EA6FBE7C390E5D70392814 /* SubtaskSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtaskSection.swift; sourceTree = "<group>"; };
@@ -86,6 +88,14 @@
 			path = Sidebar;
 			sourceTree = "<group>";
 		};
+		A7BF3D60C42235A1E6441D7A /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				001CC161EA9A5D8B64799576 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		BDC7BDA316A2D5E420C0D238 = {
 			isa = PBXGroup;
 			children = (
@@ -111,6 +121,7 @@
 			children = (
 				5B13A15705B9FBFF460F6108 /* ContentView.swift */,
 				1C1DC7E177153DC6E213C6BA /* Calendar */,
+				A7BF3D60C42235A1E6441D7A /* Settings */,
 				A78A11BDDDEC2B51125C1EFB /* Sidebar */,
 				0EC92EACC9C6C61ACB0B0E65 /* TaskDetail */,
 				DB3DD53849FA1CBC9ACB49C6 /* TaskList */,
@@ -222,6 +233,7 @@
 				3D4FD4D3EB393D6BAE92EA1A /* ListEditSheet.swift in Sources */,
 				2C7EC04AFB29D5BD57BC76D7 /* RecurrencePicker.swift in Sources */,
 				B7BF3CA9A71999B0046D86D5 /* RecurrenceRule.swift in Sources */,
+				F7A73DC1A10D653E78D98366 /* SettingsView.swift in Sources */,
 				90F88E7864AFE226340F489C /* SidebarView.swift in Sources */,
 				1FFF3F9BEAD50D6ACB8FD824 /* Subtask.swift in Sources */,
 				38A379BC1F611B4D1FB6413F /* SubtaskSection.swift in Sources */,
