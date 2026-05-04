@@ -50,6 +50,8 @@ struct TaskListView: View {
             }
         case .all:
             tasks = allTasks.filter { $0.isCompleted == completed }
+        case .calendar:
+            tasks = []
         }
 
         if completed {

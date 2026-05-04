@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11A1D29AA46F36059F9BE140 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F4513E7F79794FFCB258B /* CalendarView.swift */; };
+		1FF21A41A8BE42356B6AE549 /* CalendarDayDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E7074288B237CFD361C0D7 /* CalendarDayDetailView.swift */; };
 		1FFF3F9BEAD50D6ACB8FD824 /* Subtask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B09BB6067DFD9FA4AE5484A /* Subtask.swift */; };
 		2C7EC04AFB29D5BD57BC76D7 /* RecurrencePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3785465D10F9E5E695196D18 /* RecurrencePicker.swift */; };
 		38A379BC1F611B4D1FB6413F /* SubtaskSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EA6FBE7C390E5D70392814 /* SubtaskSection.swift */; };
@@ -27,12 +29,14 @@
 
 /* Begin PBXFileReference section */
 		0EC66655794183A45952D8FF /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
+		26E7074288B237CFD361C0D7 /* CalendarDayDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDayDetailView.swift; sourceTree = "<group>"; };
 		26EA6FBE7C390E5D70392814 /* SubtaskSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtaskSection.swift; sourceTree = "<group>"; };
 		3785465D10F9E5E695196D18 /* RecurrencePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurrencePicker.swift; sourceTree = "<group>"; };
 		3DA4997E77796CA7CA910CC3 /* TickTick.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TickTick.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DB95F5FE0AA8AF144746AF1 /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
 		401BE989223B40AA75F55A44 /* RecurrenceRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurrenceRule.swift; sourceTree = "<group>"; };
 		4B09BB6067DFD9FA4AE5484A /* Subtask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subtask.swift; sourceTree = "<group>"; };
+		559F4513E7F79794FFCB258B /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		5B13A15705B9FBFF460F6108 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5FD48B9357ED0011FCFF4242 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		73344C5D7AA37EE78A31D477 /* ListEditSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListEditSheet.swift; sourceTree = "<group>"; };
@@ -62,6 +66,15 @@
 				3DB95F5FE0AA8AF144746AF1 /* TaskDetailView.swift */,
 			);
 			path = TaskDetail;
+			sourceTree = "<group>";
+		};
+		1C1DC7E177153DC6E213C6BA /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				26E7074288B237CFD361C0D7 /* CalendarDayDetailView.swift */,
+				559F4513E7F79794FFCB258B /* CalendarView.swift */,
+			);
+			path = Calendar;
 			sourceTree = "<group>";
 		};
 		A78A11BDDDEC2B51125C1EFB /* Sidebar */ = {
@@ -97,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				5B13A15705B9FBFF460F6108 /* ContentView.swift */,
+				1C1DC7E177153DC6E213C6BA /* Calendar */,
 				A78A11BDDDEC2B51125C1EFB /* Sidebar */,
 				0EC92EACC9C6C61ACB0B0E65 /* TaskDetail */,
 				DB3DD53849FA1CBC9ACB49C6 /* TaskList */,
@@ -200,6 +214,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				402A0F5333671DCABE4BA407 /* AddTaskBar.swift in Sources */,
+				1FF21A41A8BE42356B6AE549 /* CalendarDayDetailView.swift in Sources */,
+				11A1D29AA46F36059F9BE140 /* CalendarView.swift in Sources */,
 				D03D3078265FF77DB4D57E11 /* Color+Hex.swift in Sources */,
 				8CBE671D36341C9F002C6326 /* ContentView.swift in Sources */,
 				5621F5C20ACF2D2CE0CB44D9 /* Enums.swift in Sources */,

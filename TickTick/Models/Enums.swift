@@ -49,6 +49,7 @@ enum SmartListType: String, CaseIterable, Hashable, Identifiable {
     case tomorrow
     case next7Days
     case all
+    case calendar
 
     var id: String { rawValue }
 
@@ -58,6 +59,7 @@ enum SmartListType: String, CaseIterable, Hashable, Identifiable {
         case .tomorrow: return "明天"
         case .next7Days: return "近7天"
         case .all: return "全部"
+        case .calendar: return "行事曆"
         }
     }
 
@@ -65,8 +67,9 @@ enum SmartListType: String, CaseIterable, Hashable, Identifiable {
         switch self {
         case .today: return "sun.max.fill"
         case .tomorrow: return "moon.stars.fill"
-        case .next7Days: return "calendar"
+        case .next7Days: return "calendar.badge.clock"
         case .all: return "tray.full.fill"
+        case .calendar: return "calendar"
         }
     }
 
@@ -76,6 +79,7 @@ enum SmartListType: String, CaseIterable, Hashable, Identifiable {
         case .tomorrow: return .purple
         case .next7Days: return .blue
         case .all: return .gray
+        case .calendar: return .green
         }
     }
 }
