@@ -9,11 +9,8 @@ struct CalendarView: View {
     @Binding var selectedDate: Date?
     @Binding var selectedTask: TaskItem?
     @Query(sort: \TaskItem.order) private var allTasks: [TaskItem]
-    @State private var displayDate: Date = {
-        let cal = Calendar.current
-        return cal.date(from: cal.dateComponents([.year, .month], from: Date()))!
-    }()
-    @State private var viewMode: CalendarViewMode = .month
+    @State private var displayDate: Date = Date()
+    @State private var viewMode: CalendarViewMode = .week
 
     private let weekdayHeaders = ["日", "一", "二", "三", "四", "五", "六"]
     private let columns = Array(repeating: GridItem(.flexible(), spacing: 1), count: 7)
