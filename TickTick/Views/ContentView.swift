@@ -5,6 +5,7 @@ struct ContentView: View {
     @State private var sidebarSelection: SidebarSelection = .smartList(.today)
     @State private var selectedTask: TaskItem?
     @State private var selectedCalendarDate: Date? = Date()
+    @State private var selectedCalendarTask: TaskItem?
     @State private var columnVisibility: NavigationSplitViewVisibility = .all
 
     private var isCalendarMode: Bool {
@@ -17,7 +18,7 @@ struct ContentView: View {
                 .navigationSplitViewColumnWidth(min: 180, ideal: 220, max: 280)
         } content: {
             if isCalendarMode {
-                CalendarView(selectedDate: $selectedCalendarDate)
+                CalendarView(selectedDate: $selectedCalendarDate, selectedTask: $selectedCalendarTask)
                     .navigationSplitViewColumnWidth(min: 500, ideal: 620)
             } else {
                 TaskListView(selection: sidebarSelection, selectedTask: $selectedTask)
@@ -25,8 +26,13 @@ struct ContentView: View {
             }
         } detail: {
             if isCalendarMode {
-                CalendarDayDetailView(date: selectedCalendarDate)
-                    .navigationSplitViewColumnWidth(min: 260, ideal: 320)
+                if let task = selectedCalendarTask {
+                    TaskDetailView(task: task)
+                        .navigationSplitViewColumnWidth(min: 260, ideal: 320)
+                } else {
+                    CalendarDayDetailView(date: selectedCalendarDate)
+                        .navigationSplitViewColumnWidth(min: 260, ideal: 320)
+                }
             } else if let task = selectedTask {
                 TaskDetailView(task: task)
             } else {
@@ -36,6 +42,7 @@ struct ContentView: View {
         .frame(minWidth: 900, minHeight: 560)
         .onChange(of: sidebarSelection) {
             selectedTask = nil
+            selectedCalendarTask = nil
         }
     }
 }
