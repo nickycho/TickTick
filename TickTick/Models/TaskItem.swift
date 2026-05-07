@@ -14,6 +14,8 @@ final class TaskItem {
     var order: Int
     var createdAt: Date
 
+    var spawnedNextTaskID: UUID?
+
     var list: TaskList?
 
     @Relationship(deleteRule: .cascade, inverse: \Subtask.parent)
@@ -50,36 +52,33 @@ final class TaskItem {
         self.list = list
     }
 
-    func nextDueDate() -> Date? {
-        guard let rule = recurrence, let date = dueDate else { return nil }
+    static func nextDate(from date: Date, rule: RecurrenceRule) -> Date? {
         let calendar = Calendar.current
-
         switch rule.frequency {
         case .daily:
             return calendar.date(byAdding: .day, value: 1, to: date)
-
         case .workdays:
-            var nextDate = calendar.date(byAdding: .day, value: 1, to: date)!
-            while calendar.isDateInWeekend(nextDate) {
-                nextDate = calendar.date(byAdding: .day, value: 1, to: nextDate)!
+            var next = calendar.date(byAdding: .day, value: 1, to: date)!
+            while calendar.isDateInWeekend(next) {
+                next = calendar.date(byAdding: .day, value: 1, to: next)!
             }
-            return nextDate
-
+            return next
         case .weekly:
             if rule.weekdays.isEmpty {
                 return calendar.date(byAdding: .weekOfYear, value: 1, to: date)
             }
-            var nextDate = calendar.date(byAdding: .day, value: 1, to: date)!
+            var next = calendar.date(byAdding: .day, value: 1, to: date)!
             for _ in 0..<7 {
-                // weekday component: 1=Sunday, 2=Monday, ..., 7=Saturday
-                // rule.weekdays uses 0=Sunday, 1=Monday, ..., 6=Saturday
-                let weekday = calendar.component(.weekday, from: nextDate) - 1
-                if rule.weekdays.contains(weekday) {
-                    return nextDate
-                }
-                nextDate = calendar.date(byAdding: .day, value: 1, to: nextDate)!
+                let weekday = calendar.component(.weekday, from: next) - 1
+                if rule.weekdays.contains(weekday) { return next }
+                next = calendar.date(byAdding: .day, value: 1, to: next)!
             }
             return calendar.date(byAdding: .weekOfYear, value: 1, to: date)
         }
+    }
+
+    func nextDueDate() -> Date? {
+        guard let rule = recurrence, let date = dueDate else { return nil }
+        return TaskItem.nextDate(from: date, rule: rule)
     }
 }

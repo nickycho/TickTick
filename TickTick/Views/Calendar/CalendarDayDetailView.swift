@@ -141,21 +141,30 @@ struct CalendarDayDetailView: View {
 
     private func toggleComplete(_ task: TaskItem) {
         task.isCompleted.toggle()
-        task.completedAt = task.isCompleted ? Date() : nil
-
-        guard task.isCompleted, task.recurrence != nil, let nextDate = task.nextDueDate() else { return }
-        let newTask = TaskItem(title: task.title, list: task.list)
-        newTask.notes = task.notes
-        newTask.priorityRaw = task.priorityRaw
-        newTask.dueDate = nextDate
-        newTask.hasDueTime = task.hasDueTime
-        newTask.order = task.order
-        if let rule = task.recurrence {
-            let newRule = RecurrenceRule(frequency: rule.frequency, weekdays: rule.weekdays)
-            context.insert(newRule)
-            newTask.recurrence = newRule
+        if task.isCompleted {
+            task.completedAt = Date()
+            guard task.recurrence != nil, let nextDate = task.nextDueDate() else { return }
+            let newTask = TaskItem(title: task.title, list: task.list)
+            newTask.notes = task.notes
+            newTask.priorityRaw = task.priorityRaw
+            newTask.dueDate = nextDate
+            newTask.hasDueTime = task.hasDueTime
+            newTask.order = task.order
+            if let rule = task.recurrence {
+                let newRule = RecurrenceRule(frequency: rule.frequency, weekdays: rule.weekdays)
+                context.insert(newRule)
+                newTask.recurrence = newRule
+            }
+            context.insert(newTask)
+            task.spawnedNextTaskID = newTask.id
+        } else {
+            task.completedAt = nil
+            if let spawnedID = task.spawnedNextTaskID,
+               let spawnedTask = allTasks.first(where: { $0.id == spawnedID }) {
+                context.delete(spawnedTask)
+            }
+            task.spawnedNextTaskID = nil
         }
-        context.insert(newTask)
     }
 
     // MARK: - Formatting

@@ -193,9 +193,15 @@ struct TaskListView: View {
                     newTask.recurrence = newRule
                 }
                 context.insert(newTask)
+                task.spawnedNextTaskID = newTask.id
             }
         } else {
             task.completedAt = nil
+            if let spawnedID = task.spawnedNextTaskID,
+               let spawnedTask = allTasks.first(where: { $0.id == spawnedID }) {
+                context.delete(spawnedTask)
+            }
+            task.spawnedNextTaskID = nil
         }
     }
 

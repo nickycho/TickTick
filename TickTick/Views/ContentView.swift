@@ -7,6 +7,8 @@ struct ContentView: View {
     @State private var selectedCalendarDate: Date? = Date()
     @State private var selectedCalendarTask: TaskItem?
     @State private var columnVisibility: NavigationSplitViewVisibility = .all
+    @Environment(\.modelContext) private var context
+    @Query private var allTasks: [TaskItem]
 
     private var isCalendarMode: Bool {
         sidebarSelection == .smartList(.calendar)
@@ -43,6 +45,48 @@ struct ContentView: View {
         .onChange(of: sidebarSelection) {
             selectedTask = nil
             selectedCalendarTask = nil
+        }
+        .onAppear { generateMissedRecurrences() }
+    }
+
+    private func generateMissedRecurrences() {
+        let calendar = Calendar.current
+        let endOfToday = calendar.date(byAdding: .day, value: 1, to: calendar.startOfDay(for: Date()))!
+
+        var existingKeys = Set<String>()
+        for task in allTasks {
+            guard task.recurrence != nil, let d = task.dueDate else { continue }
+            let listKey = task.list.map { String(describing: $0.persistentModelID) } ?? "nil"
+            let dayTS = Int(calendar.startOfDay(for: d).timeIntervalSince1970)
+            existingKeys.insert("\(task.title)|\(listKey)|\(dayTS)")
+        }
+
+        for task in allTasks {
+            guard !task.isCompleted,
+                  let rule = task.recurrence,
+                  let dueDate = task.dueDate else { continue }
+
+            var current = dueDate
+            while let next = TaskItem.nextDate(from: current, rule: rule), next < endOfToday {
+                let listKey = task.list.map { String(describing: $0.persistentModelID) } ?? "nil"
+                let dayTS = Int(calendar.startOfDay(for: next).timeIntervalSince1970)
+                let key = "\(task.title)|\(listKey)|\(dayTS)"
+
+                if !existingKeys.contains(key) {
+                    let newTask = TaskItem(title: task.title, list: task.list)
+                    newTask.notes = task.notes
+                    newTask.priorityRaw = task.priorityRaw
+                    newTask.dueDate = next
+                    newTask.hasDueTime = task.hasDueTime
+                    newTask.order = task.order
+                    let newRule = RecurrenceRule(frequency: rule.frequency, weekdays: rule.weekdays)
+                    context.insert(newRule)
+                    newTask.recurrence = newRule
+                    context.insert(newTask)
+                    existingKeys.insert(key)
+                }
+                current = next
+            }
         }
     }
 }
