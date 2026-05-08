@@ -19,6 +19,9 @@ struct TickTickApp: App {
                 .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
                     generateMissedRecurrencesIfNeeded()
                 }
+                .onReceive(NotificationCenter.default.publisher(for: .NSCalendarDayChanged)) { _ in
+                    generateMissedRecurrencesIfNeeded()
+                }
         }
         .modelContainer(container)
         .commands {
