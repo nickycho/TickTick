@@ -9,6 +9,7 @@ struct ContentView: View {
     @State private var columnVisibility: NavigationSplitViewVisibility = .all
     @Environment(\.modelContext) private var context
     @Query private var allTasks: [TaskItem]
+    @AppStorage("lastMissedRecurrenceCheck") private var lastCheckDateStr = ""
 
     private var isCalendarMode: Bool {
         sidebarSelection == .smartList(.calendar)
@@ -46,7 +47,17 @@ struct ContentView: View {
             selectedTask = nil
             selectedCalendarTask = nil
         }
-        .onAppear { generateMissedRecurrences() }
+        .onAppear { generateMissedRecurrencesIfNeeded() }
+        .onChange(of: allTasks) { _, _ in generateMissedRecurrencesIfNeeded() }
+    }
+
+    private func generateMissedRecurrencesIfNeeded() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let today = formatter.string(from: Date())
+        guard lastCheckDateStr != today, !allTasks.isEmpty else { return }
+        lastCheckDateStr = today
+        generateMissedRecurrences()
     }
 
     private func generateMissedRecurrences() {
