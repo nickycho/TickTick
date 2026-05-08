@@ -13,6 +13,8 @@ final class TaskItem {
     var priorityRaw: Int
     var order: Int
     var createdAt: Date
+    /// 同一條重複序列的所有 occurrence 共享相同 ID。legacy 資料為 nil，由 backfill 補。
+    var seriesID: UUID?
 
     var list: TaskList?
 
@@ -47,6 +49,7 @@ final class TaskItem {
         self.priorityRaw = Priority.none.rawValue
         self.order = 0
         self.createdAt = Date()
+        self.seriesID = UUID()
         self.list = list
     }
 
@@ -78,5 +81,35 @@ final class TaskItem {
     func nextDueDate() -> Date? {
         guard let rule = recurrence, let date = dueDate else { return nil }
         return TaskItem.nextDate(from: date, rule: rule)
+    }
+
+    /// 為下一次 occurrence 建立副本：複製屬性、繼承 seriesID、新建 RecurrenceRule、複製未完成的 subtasks。
+    /// `order` 為 nil 時保留原任務 order（適用於單筆 spawn，原任務移到完成區後不衝突）；
+    /// 批次 spawn 時應傳入遞增值，避免多筆同 order 排序未定義。
+    /// 已插入 context，呼叫端不需再 insert。
+    @discardableResult
+    func cloneForRecurrence(dueDate newDueDate: Date, order newOrder: Int? = nil, in context: ModelContext) -> TaskItem {
+        let newTask = TaskItem(title: title, list: list)
+        newTask.notes = notes
+        newTask.priorityRaw = priorityRaw
+        newTask.dueDate = newDueDate
+        newTask.hasDueTime = hasDueTime
+        newTask.order = newOrder ?? order
+        newTask.seriesID = seriesID ?? UUID()
+        context.insert(newTask)
+
+        if let rule = recurrence {
+            let newRule = RecurrenceRule(frequency: rule.frequency, weekdays: rule.weekdays)
+            context.insert(newRule)
+            newTask.recurrence = newRule
+        }
+
+        for subtask in subtasks.sorted(by: { $0.order < $1.order }) {
+            let newSubtask = Subtask(title: subtask.title, parent: newTask)
+            newSubtask.order = subtask.order
+            context.insert(newSubtask)
+        }
+
+        return newTask
     }
 }

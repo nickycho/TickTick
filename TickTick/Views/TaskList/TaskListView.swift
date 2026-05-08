@@ -182,18 +182,7 @@ struct TaskListView: View {
             task.completedAt = Date()
             if task.recurrence != nil, let nextDate = task.nextDueDate() {
                 if spawnedNextTask(for: task, nextDate: nextDate) == nil {
-                    let newTask = TaskItem(title: task.title, list: task.list)
-                    newTask.notes = task.notes
-                    newTask.priorityRaw = task.priorityRaw
-                    newTask.dueDate = nextDate
-                    newTask.hasDueTime = task.hasDueTime
-                    newTask.order = task.order
-                    if let rule = task.recurrence {
-                        let newRule = RecurrenceRule(frequency: rule.frequency, weekdays: rule.weekdays)
-                        context.insert(newRule)
-                        newTask.recurrence = newRule
-                    }
-                    context.insert(newTask)
+                    task.cloneForRecurrence(dueDate: nextDate, in: context)
                 }
             }
         } else {
@@ -206,12 +195,12 @@ struct TaskListView: View {
     }
 
     private func spawnedNextTask(for task: TaskItem, nextDate: Date) -> TaskItem? {
+        guard let series = task.seriesID else { return nil }
         let cal = Calendar.current
         return allTasks.first { t in
             t.id != task.id &&
             !t.isCompleted &&
-            t.title == task.title &&
-            t.list?.persistentModelID == task.list?.persistentModelID &&
+            t.seriesID == series &&
             t.recurrence != nil &&
             (t.dueDate.map { cal.isDate($0, inSameDayAs: nextDate) } ?? false)
         }
