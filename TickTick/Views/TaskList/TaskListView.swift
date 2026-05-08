@@ -181,27 +181,39 @@ struct TaskListView: View {
         if task.isCompleted {
             task.completedAt = Date()
             if task.recurrence != nil, let nextDate = task.nextDueDate() {
-                let newTask = TaskItem(title: task.title, list: task.list)
-                newTask.notes = task.notes
-                newTask.priorityRaw = task.priorityRaw
-                newTask.dueDate = nextDate
-                newTask.hasDueTime = task.hasDueTime
-                newTask.order = task.order
-                if let rule = task.recurrence {
-                    let newRule = RecurrenceRule(frequency: rule.frequency, weekdays: rule.weekdays)
-                    context.insert(newRule)
-                    newTask.recurrence = newRule
+                if spawnedNextTask(for: task, nextDate: nextDate) == nil {
+                    let newTask = TaskItem(title: task.title, list: task.list)
+                    newTask.notes = task.notes
+                    newTask.priorityRaw = task.priorityRaw
+                    newTask.dueDate = nextDate
+                    newTask.hasDueTime = task.hasDueTime
+                    newTask.order = task.order
+                    if let rule = task.recurrence {
+                        let newRule = RecurrenceRule(frequency: rule.frequency, weekdays: rule.weekdays)
+                        context.insert(newRule)
+                        newTask.recurrence = newRule
+                    }
+                    context.insert(newTask)
                 }
-                context.insert(newTask)
-                task.spawnedNextTaskID = newTask.id
             }
         } else {
             task.completedAt = nil
-            if let spawnedID = task.spawnedNextTaskID,
-               let spawnedTask = allTasks.first(where: { $0.id == spawnedID }) {
-                context.delete(spawnedTask)
+            if let nextDate = task.nextDueDate(),
+               let spawned = spawnedNextTask(for: task, nextDate: nextDate) {
+                context.delete(spawned)
             }
-            task.spawnedNextTaskID = nil
+        }
+    }
+
+    private func spawnedNextTask(for task: TaskItem, nextDate: Date) -> TaskItem? {
+        let cal = Calendar.current
+        return allTasks.first { t in
+            t.id != task.id &&
+            !t.isCompleted &&
+            t.title == task.title &&
+            t.list?.persistentModelID == task.list?.persistentModelID &&
+            t.recurrence != nil &&
+            (t.dueDate.map { cal.isDate($0, inSameDayAs: nextDate) } ?? false)
         }
     }
 

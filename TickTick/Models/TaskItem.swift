@@ -14,8 +14,6 @@ final class TaskItem {
     var order: Int
     var createdAt: Date
 
-    var spawnedNextTaskID: UUID?
-
     var list: TaskList?
 
     @Relationship(deleteRule: .cascade, inverse: \Subtask.parent)
