@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @AppStorage("taskFontSize") private var fontSize: Double = 14
+    @AppStorage(MissedRecurrenceMode.storageKey) private var missedModeRaw: String = MissedRecurrenceMode.default.rawValue
 
     var body: some View {
         Form {
@@ -24,9 +25,24 @@ struct SettingsView: View {
                 }
                 .padding(.top, 4)
             }
+
+            Section {
+                Picker("錯過的日期", selection: $missedModeRaw) {
+                    ForEach(MissedRecurrenceMode.allCases) { mode in
+                        Text(mode.label).tag(mode.rawValue)
+                    }
+                }
+                .pickerStyle(.inline)
+            } header: {
+                Text("重複任務")
+            } footer: {
+                Text("跨日或久未開啟 app 時，如何處理錯過的重複任務。")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
         }
         .formStyle(.grouped)
-        .frame(width: 320)
+        .frame(width: 360)
         .padding(.vertical)
     }
 }

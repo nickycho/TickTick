@@ -88,3 +88,20 @@ enum SidebarSelection: Hashable {
     case smartList(SmartListType)
     case taskList(PersistentIdentifier)
 }
+
+enum MissedRecurrenceMode: String, CaseIterable, Identifiable {
+    case allMissed
+    case todayOnly
+
+    static let storageKey = "missedRecurrenceMode"
+    static let `default`: MissedRecurrenceMode = .allMissed
+
+    var id: String { rawValue }
+
+    var label: String {
+        switch self {
+        case .allMissed: return "逐日補生（每個錯過的日期一筆任務）"
+        case .todayOnly: return "只補生最新一筆"
+        }
+    }
+}

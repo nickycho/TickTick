@@ -93,25 +93,42 @@ struct TickTickApp: App {
             maxOrderByList[listKey] = max(maxOrderByList[listKey] ?? -1, task.order)
         }
 
+        let modeRaw = UserDefaults.standard.string(forKey: MissedRecurrenceMode.storageKey)
+        let mode = MissedRecurrenceMode(rawValue: modeRaw ?? "") ?? .default
+
         for task in tasks {
             guard !task.isCompleted,
                   let rule = task.recurrence,
                   let dueDate = task.dueDate,
                   let series = task.seriesID else { continue }
 
+            // 收集所有 < endOfToday 的有效 occurrence 日期
             var current = dueDate
+            var validNexts: [Date] = []
             while let next = TaskItem.nextDate(from: current, rule: rule), next < endOfToday {
+                validNexts.append(next)
+                current = next
+            }
+
+            // 依 mode 決定要補哪些
+            let toSpawn: [Date]
+            switch mode {
+            case .allMissed:
+                toSpawn = validNexts
+            case .todayOnly:
+                toSpawn = Array(validNexts.suffix(1))
+            }
+
+            for next in toSpawn {
                 let dayTS = Int(calendar.startOfDay(for: next).timeIntervalSince1970)
                 let entryKey = "\(series.uuidString)|\(dayTS)"
+                guard !existingKeys.contains(entryKey) else { continue }
 
-                if !existingKeys.contains(entryKey) {
-                    let listKey = task.list.map { String(describing: $0.persistentModelID) } ?? "nil"
-                    let nextOrder = (maxOrderByList[listKey] ?? -1) + 1
-                    maxOrderByList[listKey] = nextOrder
-                    task.cloneForRecurrence(dueDate: next, order: nextOrder, in: context)
-                    existingKeys.insert(entryKey)
-                }
-                current = next
+                let listKey = task.list.map { String(describing: $0.persistentModelID) } ?? "nil"
+                let nextOrder = (maxOrderByList[listKey] ?? -1) + 1
+                maxOrderByList[listKey] = nextOrder
+                task.cloneForRecurrence(dueDate: next, order: nextOrder, in: context)
+                existingKeys.insert(entryKey)
             }
         }
 

@@ -10,6 +10,8 @@ struct TaskListView: View {
     @State private var showCompleted = false
     @State private var isAddingTask = false
     @State private var newTaskTitle = ""
+    @State private var pendingUncompleteTask: TaskItem?
+    @State private var showUncompleteDialog = false
 
     private var activeTasks: [TaskItem] { filtered(completed: false) }
     private var completedTasks: [TaskItem] { filtered(completed: true) }
@@ -80,7 +82,7 @@ struct TaskListView: View {
             List {
                 ForEach(activeTasks) { task in
                     let isSelected = selectedTask?.persistentModelID == task.persistentModelID
-                    TaskRow(task: task, onComplete: { completeTask(task) })
+                    TaskRow(task: task, onComplete: { handleToggleCompletion(task) })
                         .contentShape(Rectangle())
                         .onTapGesture { selectedTask = task }
                         .listRowBackground(
@@ -99,7 +101,7 @@ struct TaskListView: View {
                         if showCompleted {
                             ForEach(completedTasks) { task in
                                 let isSelected = selectedTask?.persistentModelID == task.persistentModelID
-                                TaskRow(task: task, onComplete: { completeTask(task) })
+                                TaskRow(task: task, onComplete: { handleToggleCompletion(task) })
                                     .contentShape(Rectangle())
                                     .onTapGesture { selectedTask = task }
                                     .listRowBackground(
@@ -146,6 +148,25 @@ struct TaskListView: View {
         .onReceive(NotificationCenter.default.publisher(for: .newTask)) { _ in
             isAddingTask = true
         }
+        .confirmationDialog(
+            "下一次的任務已被修改",
+            isPresented: $showUncompleteDialog,
+            presenting: pendingUncompleteTask
+        ) { task in
+            Button("保留下一次的任務") {
+                uncompleteKeepingSpawn(task)
+                pendingUncompleteTask = nil
+            }
+            Button("刪除下一次的任務", role: .destructive) {
+                completeTask(task)
+                pendingUncompleteTask = nil
+            }
+            Button("取消", role: .cancel) {
+                pendingUncompleteTask = nil
+            }
+        } message: { _ in
+            Text("下一次的重複任務已加入新內容（標題、備註或子任務）。取消完成原任務時要怎麼處理？")
+        }
     }
 
     private func addTask() {
@@ -174,6 +195,35 @@ struct TaskListView: View {
         DispatchQueue.main.async {
             selectedTask = task
         }
+    }
+
+    private func handleToggleCompletion(_ task: TaskItem) {
+        // 只攔截「取消完成原任務、且 spawned 已被使用者修改」這個情境
+        guard task.isCompleted,
+              task.recurrence != nil,
+              let nextDate = task.nextDueDate(),
+              let spawned = spawnedNextTask(for: task, nextDate: nextDate),
+              spawnedHasUserModifications(original: task, spawned: spawned) else {
+            completeTask(task)
+            return
+        }
+        pendingUncompleteTask = task
+        showUncompleteDialog = true
+    }
+
+    private func spawnedHasUserModifications(original: TaskItem, spawned: TaskItem) -> Bool {
+        if spawned.title != original.title { return true }
+        if spawned.notes != original.notes { return true }
+        if spawned.priorityRaw != original.priorityRaw { return true }
+        if spawned.subtasks.count != original.subtasks.count { return true }
+        if spawned.subtasks.contains(where: { $0.isCompleted }) { return true }
+        return false
+    }
+
+    private func uncompleteKeepingSpawn(_ task: TaskItem) {
+        task.isCompleted = false
+        task.completedAt = nil
+        // 不刪除 spawned，使用者保留變更；可能造成原任務與 spawned 同時為 active，需自行整理
     }
 
     private func completeTask(_ task: TaskItem) {
