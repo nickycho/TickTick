@@ -231,7 +231,7 @@ struct TaskListView: View {
         if task.isCompleted {
             task.completedAt = Date()
             if task.recurrence != nil, let nextDate = task.nextDueDate() {
-                if spawnedNextTask(for: task, nextDate: nextDate) == nil {
+                if !nextOccurrenceExists(for: task, onDate: nextDate) {
                     task.cloneForRecurrence(dueDate: nextDate, in: context)
                 }
             }
@@ -244,6 +244,19 @@ struct TaskListView: View {
         }
     }
 
+    /// 判斷指定日期是否已存在同一 series 的 occurrence（含已完成），避免重複補生。
+    private func nextOccurrenceExists(for task: TaskItem, onDate nextDate: Date) -> Bool {
+        guard let series = task.seriesID else { return false }
+        let cal = Calendar.current
+        return allTasks.contains { t in
+            t.id != task.id &&
+            t.seriesID == series &&
+            t.recurrence != nil &&
+            (t.dueDate.map { cal.isDate($0, inSameDayAs: nextDate) } ?? false)
+        }
+    }
+
+    /// 找出同一 series 在指定日期的「未完成」spawned task，用於取消完成時刪除。
     private func spawnedNextTask(for task: TaskItem, nextDate: Date) -> TaskItem? {
         guard let series = task.seriesID else { return nil }
         let cal = Calendar.current

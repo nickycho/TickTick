@@ -19,6 +19,7 @@
 		7ABFACCA4EA3EFD4789F2536 /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99799A6BE4EEC2344D5C85CC /* TaskItem.swift */; };
 		7E346B7645D63AE179F8BEC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E24DCD5393AEEEDAD535C76 /* Assets.xcassets */; };
 		8CBE671D36341C9F002C6326 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B13A15705B9FBFF460F6108 /* ContentView.swift */; };
+		8ECAC5B53AF313FD23047196 /* TickTickTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B6B0DF36224ED026E6D9F8 /* TickTickTests.swift */; };
 		90F88E7864AFE226340F489C /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC66655794183A45952D8FF /* SidebarView.swift */; };
 		B7BF3CA9A71999B0046D86D5 /* RecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401BE989223B40AA75F55A44 /* RecurrenceRule.swift */; };
 		BE4FCC4C1C4DF7794C5B16BF /* TickTickApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE7EEFE9661A57EEAF8F49E /* TickTickApp.swift */; };
@@ -28,6 +29,16 @@
 		E1EBF0F5B42CCD21948BAAFF /* TaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A1385CA000CDF13FE4204A /* TaskList.swift */; };
 		F7A73DC1A10D653E78D98366 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001CC161EA9A5D8B64799576 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3958112829BD8A1041333BCC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 844060867A39837ADDC27B8B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B60A0BBA579C0D1C2E1C4CE2;
+			remoteInfo = TickTick;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		001CC161EA9A5D8B64799576 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -39,9 +50,11 @@
 		3DB95F5FE0AA8AF144746AF1 /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
 		401BE989223B40AA75F55A44 /* RecurrenceRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurrenceRule.swift; sourceTree = "<group>"; };
 		4B09BB6067DFD9FA4AE5484A /* Subtask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subtask.swift; sourceTree = "<group>"; };
+		554D44AFCC9E9BA6E7D0DF40 /* TickTickTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TickTickTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		559F4513E7F79794FFCB258B /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		5B13A15705B9FBFF460F6108 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5FD48B9357ED0011FCFF4242 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
+		60B6B0DF36224ED026E6D9F8 /* TickTickTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickTickTests.swift; sourceTree = "<group>"; };
 		73344C5D7AA37EE78A31D477 /* ListEditSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListEditSheet.swift; sourceTree = "<group>"; };
 		7E24DCD5393AEEEDAD535C76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		91A1385CA000CDF13FE4204A /* TaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskList.swift; sourceTree = "<group>"; };
@@ -58,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				3DA4997E77796CA7CA910CC3 /* TickTick.app */,
+				554D44AFCC9E9BA6E7D0DF40 /* TickTickTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -102,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				D3330AD3C90887F5736BEDCC /* TickTick */,
+				D178EC8328728AA8E732D165 /* TickTickTests */,
 				0AC50A540624769E9B7ACD40 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -129,6 +144,14 @@
 				DB3DD53849FA1CBC9ACB49C6 /* TaskList */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		D178EC8328728AA8E732D165 /* TickTickTests */ = {
+			isa = PBXGroup;
+			children = (
+				60B6B0DF36224ED026E6D9F8 /* TickTickTests.swift */,
+			);
+			path = TickTickTests;
 			sourceTree = "<group>";
 		};
 		D3330AD3C90887F5736BEDCC /* TickTick */ = {
@@ -172,6 +195,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A2A5F2528594D3F8D1563635 /* TickTickTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F6CDB8AE509EE2D0CB581178 /* Build configuration list for PBXNativeTarget "TickTickTests" */;
+			buildPhases = (
+				26A5726065CFDEF61B3610C5 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				05D3FDBBCC4387692E6A79FD /* PBXTargetDependency */,
+			);
+			name = TickTickTests;
+			packageProductDependencies = (
+			);
+			productName = TickTickTests;
+			productReference = 554D44AFCC9E9BA6E7D0DF40 /* TickTickTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		B60A0BBA579C0D1C2E1C4CE2 /* TickTick */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F84B13D344AEAB70D263877C /* Build configuration list for PBXNativeTarget "TickTick" */;
@@ -219,6 +260,7 @@
 			projectRoot = "";
 			targets = (
 				B60A0BBA579C0D1C2E1C4CE2 /* TickTick */,
+				A2A5F2528594D3F8D1563635 /* TickTickTests */,
 			);
 		};
 /* End PBXProject section */
@@ -235,6 +277,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		26A5726065CFDEF61B3610C5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8ECAC5B53AF313FD23047196 /* TickTickTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5DD8BCA9CBDB40264F6C726B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -262,6 +312,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		05D3FDBBCC4387692E6A79FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B60A0BBA579C0D1C2E1C4CE2 /* TickTick */;
+			targetProxy = 3958112829BD8A1041333BCC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		069D9389F6D2D6C51972CC7B /* Debug */ = {
@@ -327,6 +385,25 @@
 			};
 			name = Debug;
 		};
+		3439B28EE6E5A40A2A03C06E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nickycho.TickTickTests;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TickTick.app/Contents/MacOS/TickTick";
+			};
+			name = Release;
+		};
 		4B944D16B81A7249FCA9E7C8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -356,6 +433,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 8;
+				ENABLE_TESTABILITY = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = TickTick;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
@@ -428,6 +506,25 @@
 			};
 			name = Release;
 		};
+		F6231255A7C9082BEBF3AC8B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nickycho.TickTickTests;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TickTick.app/Contents/MacOS/TickTick";
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -436,6 +533,15 @@
 			buildConfigurations = (
 				069D9389F6D2D6C51972CC7B /* Debug */,
 				DF8C721F10AEF7B1E6D0AC11 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F6CDB8AE509EE2D0CB581178 /* Build configuration list for PBXNativeTarget "TickTickTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F6231255A7C9082BEBF3AC8B /* Debug */,
+				3439B28EE6E5A40A2A03C06E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

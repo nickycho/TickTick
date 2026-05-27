@@ -27,3 +27,18 @@ targets:
       configs:
         Debug:
           SWIFT_ACTIVE_COMPILATION_CONDITIONS: DEBUG
+          ENABLE_TESTABILITY: YES
+  TickTickTests:
+    type: bundle.unit-test
+    platform: macOS
+    deploymentTarget: "14.0"
+    sources:
+      - path: TickTickTests
+    dependencies:
+      - target: TickTick
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.nickycho.TickTickTests
+        SWIFT_VERSION: "5.0"
+        MACOSX_DEPLOYMENT_TARGET: "14.0"
+        GENERATE_INFOPLIST_FILE: YES
