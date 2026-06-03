@@ -83,6 +83,26 @@ final class TaskItem {
         return TaskItem.nextDate(from: date, rule: rule)
     }
 
+    /// 完成此任務時補生下一次 occurrence。三條 spawn 路徑（啟動補生、清單完成、行事曆完成）
+    /// 共用此方法，統一以 seriesID + 同日去重，並透過 `cloneForRecurrence` 繼承 seriesID，
+    /// 避免行事曆路徑舊實作配發新 seriesID 而斷開序列鏈、造成跨路徑重複補生。
+    /// 已存在同 series 同日 occurrence（含已完成）時回傳 nil 不補生。
+    @discardableResult
+    func spawnNextIfNeeded(among allTasks: [TaskItem], in context: ModelContext) -> TaskItem? {
+        guard recurrence != nil,
+              let nextDate = nextDueDate(),
+              let series = seriesID else { return nil }
+        let cal = Calendar.current
+        let exists = allTasks.contains { t in
+            t.id != id &&
+            t.seriesID == series &&
+            t.recurrence != nil &&
+            (t.dueDate.map { cal.isDate($0, inSameDayAs: nextDate) } ?? false)
+        }
+        guard !exists else { return nil }
+        return cloneForRecurrence(dueDate: nextDate, in: context)
+    }
+
     /// 為下一次 occurrence 建立副本：複製屬性、繼承 seriesID、新建 RecurrenceRule、複製未完成的 subtasks。
     /// `order` 為 nil 時保留原任務 order（適用於單筆 spawn，原任務移到完成區後不衝突）；
     /// 批次 spawn 時應傳入遞增值，避免多筆同 order 排序未定義。

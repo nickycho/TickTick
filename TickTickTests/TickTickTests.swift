@@ -330,3 +330,87 @@ final class DuplicatePreventionTests: XCTestCase {
         try context.fetch(FetchDescriptor<TaskItem>())
     }
 }
+
+// MARK: - 三條 spawn 路徑統一行為測試（Calendar 路徑斷鏈 Bug）
+
+@MainActor
+final class SharedSpawnTests: XCTestCase {
+    var container: ModelContainer!
+    var context: ModelContext!
+
+    override func setUpWithError() throws {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        container = try ModelContainer(
+            for: TaskItem.self, TaskList.self, Subtask.self, RecurrenceRule.self,
+            configurations: config
+        )
+        context = container.mainContext
+    }
+
+    override func tearDownWithError() throws {
+        context = nil
+        container = nil
+    }
+
+    /// 核心 Bug：Calendar 路徑舊實作以 `TaskItem.init` 手刻 clone，會配發全新 seriesID，
+    /// 斷開重複序列鏈。統一後補生的下一筆必須「繼承」原任務 seriesID。
+    func testSpawnNextIfNeeded_inheritsSeriesID() throws {
+        let series = UUID()
+        let task = makeTask(title: "番茄鐘", dueDate: Calendar.current.startOfDay(for: Date()), series: series)
+        try context.save()
+
+        let spawned = task.spawnNextIfNeeded(among: try fetchAll(), in: context)
+
+        XCTAssertNotNil(spawned, "完成有重複規則的任務應補生下一筆")
+        XCTAssertEqual(spawned?.seriesID, series, "補生的下一筆必須繼承同一 seriesID，不可配發新的")
+    }
+
+    /// 跨路徑去重：當啟動補生已用同一 series 補出今天的 occurrence，
+    /// Calendar 路徑完成昨天任務時，因 seriesID 一致，不應再補出第二筆。
+    func testSpawnNextIfNeeded_noDuplicateWhenSeriesOccurrenceExists() throws {
+        let cal = Calendar.current
+        let yesterday = cal.date(byAdding: .day, value: -1, to: cal.startOfDay(for: Date()))!
+        let today = cal.startOfDay(for: Date())
+        let series = UUID()
+
+        let taskA = makeTask(title: "看書", dueDate: yesterday, series: series)
+        _ = makeTask(title: "看書", dueDate: today, series: series) // 啟動補生產出的今天 occurrence
+        try context.save()
+
+        let before = try fetchAll().count
+        let spawned = taskA.spawnNextIfNeeded(among: try fetchAll(), in: context)
+        try context.save()
+
+        XCTAssertNil(spawned, "同 series 今天已有 occurrence，不應再補生")
+        XCTAssertEqual(try fetchAll().count, before, "任務總數不應增加")
+    }
+
+    /// 非重複任務不補生。
+    func testSpawnNextIfNeeded_noopForNonRecurring() throws {
+        let task = TaskItem(title: "一次性任務")
+        task.dueDate = Calendar.current.startOfDay(for: Date())
+        context.insert(task)
+        try context.save()
+
+        let spawned = task.spawnNextIfNeeded(among: try fetchAll(), in: context)
+        XCTAssertNil(spawned)
+    }
+
+    @discardableResult
+    private func makeTask(title: String, dueDate: Date, series: UUID, completed: Bool = false) -> TaskItem {
+        let task = TaskItem(title: title)
+        task.dueDate = dueDate
+        task.seriesID = series
+        task.isCompleted = completed
+        if completed { task.completedAt = Date() }
+        let rule = RecurrenceRule(frequency: .daily)
+        context.insert(task)
+        context.insert(rule)
+        task.recurrence = rule
+        return task
+    }
+
+    private func fetchAll() throws -> [TaskItem] {
+        try context.fetch(FetchDescriptor<TaskItem>())
+    }
+}

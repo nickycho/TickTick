@@ -230,29 +230,13 @@ struct TaskListView: View {
         task.isCompleted.toggle()
         if task.isCompleted {
             task.completedAt = Date()
-            if task.recurrence != nil, let nextDate = task.nextDueDate() {
-                if !nextOccurrenceExists(for: task, onDate: nextDate) {
-                    task.cloneForRecurrence(dueDate: nextDate, in: context)
-                }
-            }
+            task.spawnNextIfNeeded(among: allTasks, in: context)
         } else {
             task.completedAt = nil
             if let nextDate = task.nextDueDate(),
                let spawned = spawnedNextTask(for: task, nextDate: nextDate) {
                 context.delete(spawned)
             }
-        }
-    }
-
-    /// 判斷指定日期是否已存在同一 series 的 occurrence（含已完成），避免重複補生。
-    private func nextOccurrenceExists(for task: TaskItem, onDate nextDate: Date) -> Bool {
-        guard let series = task.seriesID else { return false }
-        let cal = Calendar.current
-        return allTasks.contains { t in
-            t.id != task.id &&
-            t.seriesID == series &&
-            t.recurrence != nil &&
-            (t.dueDate.map { cal.isDate($0, inSameDayAs: nextDate) } ?? false)
         }
     }
 

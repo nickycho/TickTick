@@ -20,8 +20,8 @@ targets:
         GENERATE_INFOPLIST_FILE: YES
         INFOPLIST_KEY_CFBundleDisplayName: TickTick
         INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.productivity
-        CURRENT_PROJECT_VERSION: 9
-        MARKETING_VERSION: "1.1.7"
+        CURRENT_PROJECT_VERSION: 10
+        MARKETING_VERSION: "1.1.8"
         CODE_SIGN_STYLE: Automatic
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
       configs:
