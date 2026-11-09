@@ -14,6 +14,7 @@
 		38A379BC1F611B4D1FB6413F /* SubtaskSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EA6FBE7C390E5D70392814 /* SubtaskSection.swift */; };
 		3D4FD4D3EB393D6BAE92EA1A /* ListEditSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73344C5D7AA37EE78A31D477 /* ListEditSheet.swift */; };
 		402A0F5333671DCABE4BA407 /* AddTaskBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3E2D777C9EF31C75B4E61E /* AddTaskBar.swift */; };
+		44DD7896D0B48A2AA99A3E9A /* PersistenceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7114730599A8774DD3C8D701 /* PersistenceStore.swift */; };
 		5621F5C20ACF2D2CE0CB44D9 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F9C04A8F8AE3B5E25B1C4B /* Enums.swift */; };
 		6346797A4E27ACF7BD6B32BD /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD48B9357ED0011FCFF4242 /* TaskListView.swift */; };
 		7ABFACCA4EA3EFD4789F2536 /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99799A6BE4EEC2344D5C85CC /* TaskItem.swift */; };
@@ -55,6 +56,7 @@
 		5B13A15705B9FBFF460F6108 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5FD48B9357ED0011FCFF4242 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		60B6B0DF36224ED026E6D9F8 /* TickTickTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickTickTests.swift; sourceTree = "<group>"; };
+		7114730599A8774DD3C8D701 /* PersistenceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceStore.swift; sourceTree = "<group>"; };
 		73344C5D7AA37EE78A31D477 /* ListEditSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListEditSheet.swift; sourceTree = "<group>"; };
 		7E24DCD5393AEEEDAD535C76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		91A1385CA000CDF13FE4204A /* TaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskList.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 		D6DF1BDA5E8D775949303084 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				7114730599A8774DD3C8D701 /* PersistenceStore.swift */,
 				CBE7EEFE9661A57EEAF8F49E /* TickTickApp.swift */,
 			);
 			path = App;
@@ -296,6 +299,7 @@
 				8CBE671D36341C9F002C6326 /* ContentView.swift in Sources */,
 				5621F5C20ACF2D2CE0CB44D9 /* Enums.swift in Sources */,
 				3D4FD4D3EB393D6BAE92EA1A /* ListEditSheet.swift in Sources */,
+				44DD7896D0B48A2AA99A3E9A /* PersistenceStore.swift in Sources */,
 				2C7EC04AFB29D5BD57BC76D7 /* RecurrencePicker.swift in Sources */,
 				B7BF3CA9A71999B0046D86D5 /* RecurrenceRule.swift in Sources */,
 				F7A73DC1A10D653E78D98366 /* SettingsView.swift in Sources */,
@@ -410,7 +414,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = TickTick;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
@@ -419,7 +423,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.1.8;
+				MARKETING_VERSION = 1.1.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nickycho.TickTick;
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
@@ -432,7 +436,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				ENABLE_TESTABILITY = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = TickTick;
@@ -442,7 +446,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.1.8;
+				MARKETING_VERSION = 1.1.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nickycho.TickTick;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;

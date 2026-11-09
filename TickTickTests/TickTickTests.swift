@@ -414,3 +414,65 @@ final class SharedSpawnTests: XCTestCase {
         try context.fetch(FetchDescriptor<TaskItem>())
     }
 }
+
+// MARK: - 持久化路徑與 legacy store 遷移測試
+
+final class PersistenceStoreTests: XCTestCase {
+    private var temporaryDirectory: URL!
+
+    override func setUpWithError() throws {
+        temporaryDirectory = FileManager.default.temporaryDirectory
+            .appendingPathComponent("TickTickPersistenceTests-\(UUID().uuidString)", isDirectory: true)
+        try FileManager.default.createDirectory(
+            at: temporaryDirectory,
+            withIntermediateDirectories: true
+        )
+    }
+
+    override func tearDownWithError() throws {
+        if let temporaryDirectory {
+            try? FileManager.default.removeItem(at: temporaryDirectory)
+        }
+        temporaryDirectory = nil
+    }
+
+    func testStoreURLIsAppSpecificAndNotGlobalDefaultStore() throws {
+        let url = try PersistenceStore.storeURL(applicationSupportDirectory: temporaryDirectory)
+
+        XCTAssertEqual(url.lastPathComponent, "TickTick.store")
+        XCTAssertEqual(url.deletingLastPathComponent().lastPathComponent, "com.nickycho.TickTick")
+        XCTAssertNotEqual(url.lastPathComponent, "default.store")
+    }
+
+    func testLegacyMigrationCopiesStoreAndSQLiteSidecars() throws {
+        let fileManager = FileManager.default
+        let legacyURL = PersistenceStore.legacyStoreURL(applicationSupportDirectory: temporaryDirectory)
+        let legacyWALURL = URL(fileURLWithPath: legacyURL.path + "-wal")
+        let legacySHMURL = URL(fileURLWithPath: legacyURL.path + "-shm")
+        let legacyContents = [
+            legacyURL: Data("store".utf8),
+            legacyWALURL: Data("wal".utf8),
+            legacySHMURL: Data("shm".utf8),
+        ]
+
+        for (url, data) in legacyContents {
+            fileManager.createFile(atPath: url.path, contents: data)
+        }
+
+        try PersistenceStore.migrateLegacyStoreIfNeeded(
+            applicationSupportDirectory: temporaryDirectory,
+            fileManager: fileManager
+        )
+
+        let destinationURL = try PersistenceStore.storeURL(applicationSupportDirectory: temporaryDirectory)
+        XCTAssertEqual(try Data(contentsOf: destinationURL), legacyContents[legacyURL])
+        XCTAssertEqual(
+            try Data(contentsOf: URL(fileURLWithPath: destinationURL.path + "-wal")),
+            legacyContents[legacyWALURL]
+        )
+        XCTAssertEqual(
+            try Data(contentsOf: URL(fileURLWithPath: destinationURL.path + "-shm")),
+            legacyContents[legacySHMURL]
+        )
+    }
+}

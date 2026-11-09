@@ -7,7 +7,28 @@ struct TickTickApp: App {
 
     init() {
         do {
-            container = try ModelContainer(for: TaskItem.self, TaskList.self, Subtask.self, RecurrenceRule.self)
+            guard let applicationSupportDirectory = FileManager.default.urls(
+                for: .applicationSupportDirectory,
+                in: .userDomainMask
+            ).first else {
+                throw CocoaError(.fileNoSuchFile)
+            }
+
+            try PersistenceStore.migrateLegacyStoreIfNeeded(
+                applicationSupportDirectory: applicationSupportDirectory
+            )
+
+            let schema = Schema([
+                TaskItem.self,
+                TaskList.self,
+                Subtask.self,
+                RecurrenceRule.self,
+            ])
+            let storeURL = try PersistenceStore.storeURL(
+                applicationSupportDirectory: applicationSupportDirectory
+            )
+            let configuration = ModelConfiguration(schema: schema, url: storeURL)
+            container = try ModelContainer(for: schema, configurations: configuration)
         } catch {
             fatalError("Failed to create ModelContainer: \(error)")
         }

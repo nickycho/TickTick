@@ -254,6 +254,17 @@ SidebarSelection == .smartList(.calendar)
 
 ## SwiftData Schema 注意事項
 
+持久化 store 使用 app 專屬路徑：
+
+```text
+~/Library/Application Support/com.nickycho.TickTick/TickTick.store
+```
+
+首次啟動時，如果專屬 store 尚不存在，`PersistenceStore` 會將舊版使用的
+`~/Library/Application Support/default.store` 及其 `-wal`、`-shm` sidecar 複製到新路徑。
+之後 app 只會開啟專屬 store，避免與其他使用 SwiftData 預設 `default.store` 的 macOS
+服務互相碰撞。
+
 > **新增 model 屬性前必讀**：SwiftData auto-migration 在某些情況下會失敗並清空資料庫。建議在開發時備份資料，或提供 `VersionedSchema` + `MigrationPlan`（目前 v1 尚未實作 migration plan）。
 
 ---
