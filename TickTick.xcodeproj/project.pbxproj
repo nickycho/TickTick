@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		11A1D29AA46F36059F9BE140 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F4513E7F79794FFCB258B /* CalendarView.swift */; };
+		1E68F8CD6C9CD813FE680546 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D2E86292933FD9932E2C5A59 /* Localizable.xcstrings */; };
 		1FF21A41A8BE42356B6AE549 /* CalendarDayDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E7074288B237CFD361C0D7 /* CalendarDayDetailView.swift */; };
 		1FFF3F9BEAD50D6ACB8FD824 /* Subtask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B09BB6067DFD9FA4AE5484A /* Subtask.swift */; };
 		2C7EC04AFB29D5BD57BC76D7 /* RecurrencePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3785465D10F9E5E695196D18 /* RecurrencePicker.swift */; };
@@ -65,6 +66,7 @@
 		ADAB4D1D4A559813812F01CD /* TaskRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRow.swift; sourceTree = "<group>"; };
 		C0F9C04A8F8AE3B5E25B1C4B /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		CBE7EEFE9661A57EEAF8F49E /* TickTickApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickTickApp.swift; sourceTree = "<group>"; };
+		D2E86292933FD9932E2C5A59 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		E02C2362D4BC18291756E35A /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -160,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				7E24DCD5393AEEEDAD535C76 /* Assets.xcassets */,
+				D2E86292933FD9932E2C5A59 /* Localizable.xcstrings */,
 				D6DF1BDA5E8D775949303084 /* App */,
 				FA67BF2C0CC3B67C02B11C7D /* Extensions */,
 				C987DE248D2DD06288EE9017 /* Models */,
@@ -254,6 +257,9 @@
 			knownRegions = (
 				Base,
 				en,
+				ja,
+				ko,
+				"zh-Hant",
 			);
 			mainGroup = BDC7BDA316A2D5E420C0D238;
 			minimizedProjectReferenceProxies = 1;
@@ -274,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E346B7645D63AE179F8BEC6 /* Assets.xcassets in Resources */,
+				1E68F8CD6C9CD813FE680546 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,7 +421,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = TickTick;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
@@ -423,7 +430,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.1.9;
+				MARKETING_VERSION = 1.1.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nickycho.TickTick;
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
@@ -436,7 +443,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				ENABLE_TESTABILITY = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = TickTick;
@@ -446,7 +453,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.1.9;
+				MARKETING_VERSION = 1.1.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nickycho.TickTick;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;

@@ -10,7 +10,7 @@ struct TaskDetailView: View {
             VStack(alignment: .leading, spacing: 0) {
 
                 // Title
-                TextField("任務標題", text: $task.title, axis: .vertical)
+                TextField("Task Title", text: $task.title, axis: .vertical)
                     .font(.title2.bold())
                     .textFieldStyle(.plain)
                     .padding(6)
@@ -18,7 +18,7 @@ struct TaskDetailView: View {
                     .padding(.bottom, 8)
 
                 // Notes
-                TextField("備註...", text: $task.notes, axis: .vertical)
+                TextField("Notes…", text: $task.notes, axis: .vertical)
                     .font(.body)
                     .textFieldStyle(.plain)
                     .foregroundStyle(.secondary)
@@ -52,7 +52,7 @@ struct TaskDetailView: View {
                         }
                         .toggleStyle(.button)
                         .controlSize(.mini)
-                        .help("包含時間")
+                        .help("Include Time")
 
                         Button(action: {
                             task.dueDate = nil
@@ -63,7 +63,7 @@ struct TaskDetailView: View {
                         }
                         .buttonStyle(.plain)
                     } else {
-                        Button("新增截止日期") {
+                        Button("Add Due Date") {
                             task.dueDate = Calendar.current.startOfDay(for: Date())
                         }
                         .buttonStyle(.plain)
@@ -80,7 +80,7 @@ struct TaskDetailView: View {
                         .foregroundStyle(.secondary)
                         .frame(width: 20)
 
-                    Text("優先級")
+                    Text("Priority")
                         .foregroundStyle(.secondary)
 
                     Spacer()

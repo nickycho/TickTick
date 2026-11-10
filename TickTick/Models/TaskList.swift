@@ -21,13 +21,13 @@ final class TaskList {
     }
 
     static let presetColors: [(name: String, hex: String)] = [
-        ("藍", "#4A90E2"),
-        ("綠", "#5CB85C"),
-        ("紅", "#D9534F"),
-        ("橘", "#F0AD4E"),
-        ("紫", "#9B59B6"),
-        ("粉", "#E91E8C"),
-        ("青", "#17A2B8"),
-        ("灰", "#6C757D"),
+        ("Blue", "#4A90E2"),
+        ("Green", "#5CB85C"),
+        ("Red", "#D9534F"),
+        ("Orange", "#F0AD4E"),
+        ("Purple", "#9B59B6"),
+        ("Pink", "#E91E8C"),
+        ("Teal", "#17A2B8"),
+        ("Gray", "#6C757D"),
     ]
 }

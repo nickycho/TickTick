@@ -15,7 +15,7 @@ struct AddTaskBar: View {
                         .foregroundStyle(.secondary)
                         .font(.system(size: 18))
 
-                    TextField("新增任務...", text: $text)
+                    TextField("Add a task…", text: $text)
                         .textFieldStyle(.plain)
                         .focused($isFocused)
                         .onSubmit(onSubmit)
@@ -40,7 +40,7 @@ struct AddTaskBar: View {
                     HStack {
                         Image(systemName: "plus.circle.fill")
                             .foregroundStyle(Color.accentColor)
-                        Text("新增任務")
+                        Text("Add Task")
                             .foregroundStyle(.secondary)
                         Spacer()
                     }

@@ -64,11 +64,12 @@ struct TaskListView: View {
         return tasks
     }
 
-    private var navigationTitle: String {
+    private var navigationTitle: Text {
         switch selection {
-        case .smartList(let type): return type.title
+        case .smartList(let type):
+            return Text(type.title)
         case .taskList(let id):
-            return allLists.first { $0.persistentModelID == id }?.name ?? "清單"
+            return Text(allLists.first { $0.persistentModelID == id }?.name ?? "List")
         }
     }
 
@@ -91,7 +92,7 @@ struct TaskListView: View {
                                 : Color.clear
                         )
                         .contextMenu {
-                            Button("刪除", role: .destructive) { deleteTask(task) }
+                            Button("Delete", role: .destructive) { deleteTask(task) }
                         }
                 }
                 .onMove(perform: canReorder ? moveTask : nil)
@@ -110,7 +111,7 @@ struct TaskListView: View {
                                             : Color.clear
                                     )
                                     .contextMenu {
-                                        Button("刪除", role: .destructive) { deleteTask(task) }
+                                        Button("Delete", role: .destructive) { deleteTask(task) }
                                     }
                             }
                         }
@@ -120,7 +121,9 @@ struct TaskListView: View {
                                 Image(systemName: showCompleted ? "chevron.down" : "chevron.right")
                                     .font(.caption2)
                                     .frame(width: 12)
-                                Text("已完成（\(completedTasks.count)）")
+                                Text("Completed")
+                                    .font(.subheadline)
+                                Text("(\(completedTasks.count))")
                                     .font(.subheadline)
                                 Spacer()
                             }
@@ -142,30 +145,30 @@ struct TaskListView: View {
                 Button(action: { isAddingTask = true }) {
                     Image(systemName: "square.and.pencil")
                 }
-                .help("新增任務 (⌘N)")
+                .help("Add a task (⌘N)")
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: .newTask)) { _ in
             isAddingTask = true
         }
         .confirmationDialog(
-            "下一次的任務已被修改",
+            "The next occurrence has been changed",
             isPresented: $showUncompleteDialog,
             presenting: pendingUncompleteTask
         ) { task in
-            Button("保留下一次的任務") {
+            Button("Keep the next occurrence") {
                 uncompleteKeepingSpawn(task)
                 pendingUncompleteTask = nil
             }
-            Button("刪除下一次的任務", role: .destructive) {
+            Button("Delete the next occurrence", role: .destructive) {
                 completeTask(task)
                 pendingUncompleteTask = nil
             }
-            Button("取消", role: .cancel) {
+            Button("Cancel", role: .cancel) {
                 pendingUncompleteTask = nil
             }
         } message: { _ in
-            Text("下一次的重複任務已加入新內容（標題、備註或子任務）。取消完成原任務時要怎麼處理？")
+            Text("The next recurring task has been edited (title, notes, or subtasks). What should happen when you mark the original task as incomplete?")
         }
     }
 

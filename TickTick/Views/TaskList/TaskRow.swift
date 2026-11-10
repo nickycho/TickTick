@@ -4,6 +4,7 @@ struct TaskRow: View {
     @Bindable var task: TaskItem
     let onComplete: () -> Void
     @AppStorage("taskFontSize") private var fontSize: Double = 14
+    @Environment(\.locale) private var locale
 
     var body: some View {
         HStack(spacing: 10) {
@@ -60,36 +61,44 @@ struct TaskRow: View {
 
     private func formattedDate(_ date: Date) -> String {
         let calendar = Calendar.current
+        let relativeDate: String?
+
         if calendar.isDateInToday(date) {
-            return task.hasDueTime ? "今天 \(timeString(date))" : "今天"
+            relativeDate = String(localized: "Today", locale: locale)
         } else if calendar.isDateInTomorrow(date) {
-            return task.hasDueTime ? "明天 \(timeString(date))" : "明天"
+            relativeDate = String(localized: "Tomorrow", locale: locale)
         } else if calendar.isDateInYesterday(date) {
-            return task.hasDueTime ? "昨天 \(timeString(date))" : "昨天"
+            relativeDate = String(localized: "Yesterday", locale: locale)
         } else {
-            return task.hasDueTime ? dateTimeString(date) : dateString(date)
+            relativeDate = nil
         }
+
+        if let relativeDate {
+            return task.hasDueTime ? "\(relativeDate) \(timeString(date))" : relativeDate
+        }
+        return task.hasDueTime ? dateTimeString(date) : dateString(date)
     }
 
     private func timeString(_ date: Date) -> String {
-        let f = DateFormatter()
-        f.dateFormat = "HH:mm"
-        return f.string(from: date)
+        let formatter = DateFormatter()
+        formatter.locale = locale
+        formatter.timeStyle = .short
+        return formatter.string(from: date)
     }
 
     private func dateString(_ date: Date) -> String {
-        let f = DateFormatter()
-        f.locale = Locale(identifier: "zh_TW")
-        f.dateStyle = .medium
-        f.timeStyle = .none
-        return f.string(from: date)
+        let formatter = DateFormatter()
+        formatter.locale = locale
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        return formatter.string(from: date)
     }
 
     private func dateTimeString(_ date: Date) -> String {
-        let f = DateFormatter()
-        f.locale = Locale(identifier: "zh_TW")
-        f.dateStyle = .medium
-        f.timeStyle = .short
-        return f.string(from: date)
+        let formatter = DateFormatter()
+        formatter.locale = locale
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        return formatter.string(from: date)
     }
 }

@@ -36,7 +36,7 @@ struct ContentView: View {
             } else if let task = selectedTask {
                 TaskDetailView(task: task)
             } else {
-                ContentUnavailableView("選擇一個任務", systemImage: "checkmark.circle")
+                ContentUnavailableView("Select a task", systemImage: "checkmark.circle")
             }
         }
         .frame(minWidth: 900, minHeight: 560)

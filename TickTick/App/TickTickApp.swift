@@ -4,6 +4,7 @@ import SwiftData
 @main
 struct TickTickApp: App {
     let container: ModelContainer
+    @AppStorage(AppLanguage.storageKey) private var appLanguageRawValue = AppLanguage.system.rawValue
 
     init() {
         do {
@@ -34,9 +35,14 @@ struct TickTickApp: App {
         }
     }
 
+    private var appLocale: Locale {
+        AppLanguage.locale(for: appLanguageRawValue)
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(\.locale, appLocale)
                 .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
                     backfillSeriesIDsIfNeeded()
                     generateMissedRecurrencesIfNeeded()
@@ -48,7 +54,7 @@ struct TickTickApp: App {
         .modelContainer(container)
         .commands {
             CommandGroup(replacing: .newItem) {
-                Button("新增任務") {
+                Button(String(localized: "New Task", locale: appLocale)) {
                     NotificationCenter.default.post(name: .newTask, object: nil)
                 }
                 .keyboardShortcut("n", modifiers: .command)
@@ -57,6 +63,7 @@ struct TickTickApp: App {
 
         Settings {
             SettingsView()
+                .environment(\.locale, appLocale)
         }
     }
 

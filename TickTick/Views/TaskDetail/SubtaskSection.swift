@@ -15,7 +15,7 @@ struct SubtaskSection: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
-                Text("子任務")
+                Text("Subtasks")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                 Spacer()
@@ -39,7 +39,7 @@ struct SubtaskSection: View {
                         .foregroundStyle(.secondary)
                         .font(.system(size: 14))
 
-                    TextField("新增子任務...", text: $newSubtaskTitle)
+                    TextField("Add a subtask…", text: $newSubtaskTitle)
                         .textFieldStyle(.plain)
                         .focused($addFieldFocused)
                         .onSubmit { commitSubtask() }

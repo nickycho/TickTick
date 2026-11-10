@@ -4,6 +4,7 @@ import SwiftData
 struct CalendarDayDetailView: View {
     let date: Date?
     @Environment(\.modelContext) private var context
+    @Environment(\.locale) private var locale
     @Query(sort: \TaskItem.order) private var allTasks: [TaskItem]
     @State private var selectedTask: TaskItem?
     @State private var isAddingTask = false
@@ -29,7 +30,7 @@ struct CalendarDayDetailView: View {
                     dayListPanel(for: date)
                 }
             } else {
-                ContentUnavailableView("選擇日期", systemImage: "calendar")
+                ContentUnavailableView("Select a date", systemImage: "calendar")
             }
         }
         .onChange(of: date) { selectedTask = nil }
@@ -94,7 +95,7 @@ struct CalendarDayDetailView: View {
                         .font(.system(size: 32))
                         .foregroundStyle(.tertiary)
                         .padding(.bottom, 8)
-                    Text("這天沒有任務")
+                    Text("No tasks on this day")
                         .foregroundStyle(.tertiary)
                     Spacer()
                 }
@@ -109,7 +110,7 @@ struct CalendarDayDetailView: View {
                                 isSelected ? Color.accentColor.opacity(0.12) : Color.clear
                             )
                             .contextMenu {
-                                Button("刪除", role: .destructive) { context.delete(task) }
+                                Button("Delete", role: .destructive) { context.delete(task) }
                             }
                     }
                 }
@@ -170,20 +171,29 @@ struct CalendarDayDetailView: View {
     // MARK: - Formatting
 
     private func dayTitle(_ date: Date) -> String {
-        let cal = Calendar.current
-        if cal.isDateInToday(date) { return "今天" }
-        if cal.isDateInTomorrow(date) { return "明天" }
-        if cal.isDateInYesterday(date) { return "昨天" }
-        let f = DateFormatter()
-        f.locale = Locale(identifier: "zh_TW")
-        f.dateFormat = "M月d日"
-        return f.string(from: date)
+        let calendar = Calendar.current
+        if calendar.isDateInToday(date) {
+            return String(localized: "Today", locale: locale)
+        }
+        if calendar.isDateInTomorrow(date) {
+            return String(localized: "Tomorrow", locale: locale)
+        }
+        if calendar.isDateInYesterday(date) {
+            return String(localized: "Yesterday", locale: locale)
+        }
+
+        let formatter = DateFormatter()
+        formatter.locale = locale
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        return formatter.string(from: date)
     }
 
     private func fullDateString(_ date: Date) -> String {
-        let f = DateFormatter()
-        f.locale = Locale(identifier: "zh_TW")
-        f.dateFormat = "yyyy年M月d日 EEEE"
-        return f.string(from: date)
+        let formatter = DateFormatter()
+        formatter.locale = locale
+        formatter.dateStyle = .full
+        formatter.timeStyle = .none
+        return formatter.string(from: date)
     }
 }

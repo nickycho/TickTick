@@ -6,14 +6,14 @@ struct ListEditSheet: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            Text("編輯清單")
+            Text("Edit List")
                 .font(.headline)
 
-            TextField("清單名稱", text: $list.name)
+            TextField("List Name", text: $list.name)
                 .textFieldStyle(.roundedBorder)
 
             VStack(alignment: .leading, spacing: 10) {
-                Text("顏色")
+                Text("Color")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
 
@@ -30,6 +30,7 @@ struct ListEditSheet: View {
                                     .strokeBorder(.white, lineWidth: 2.5)
                                     .opacity(list.colorHex == option.hex ? 1 : 0)
                             )
+                            .accessibilityLabel(LocalizedStringKey(option.name))
                             .shadow(color: .black.opacity(0.15), radius: 2)
                             .onTapGesture { list.colorHex = option.hex }
                     }
@@ -38,9 +39,9 @@ struct ListEditSheet: View {
 
             HStack {
                 Spacer()
-                Button("取消") { dismiss() }
+                Button("Cancel") { dismiss() }
                     .buttonStyle(.bordered)
-                Button("完成") { dismiss() }
+                Button("Done") { dismiss() }
                     .buttonStyle(.borderedProminent)
             }
         }

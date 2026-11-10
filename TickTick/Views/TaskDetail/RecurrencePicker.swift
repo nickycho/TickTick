@@ -4,8 +4,13 @@ import SwiftData
 struct RecurrencePicker: View {
     @Bindable var task: TaskItem
     @Environment(\.modelContext) private var context
+    @Environment(\.locale) private var locale
 
-    private let weekdayNames = ["日", "一", "二", "三", "四", "五", "六"]
+    private var weekdayNames: [String] {
+        let formatter = DateFormatter()
+        formatter.locale = locale
+        return formatter.veryShortWeekdaySymbols
+    }
 
     var body: some View {
         HStack(alignment: .center, spacing: 10) {
@@ -22,7 +27,7 @@ struct RecurrencePicker: View {
                         }
                     }
                     Divider()
-                    Button("移除重複", role: .destructive) {
+                    Button("Remove Recurrence", role: .destructive) {
                         context.delete(rule)
                         task.recurrence = nil
                     }
@@ -56,7 +61,7 @@ struct RecurrencePicker: View {
                     }
                 }
             } else {
-                Button("新增重複") {
+                Button("Add Recurrence") {
                     let rule = RecurrenceRule(frequency: .daily)
                     context.insert(rule)
                     task.recurrence = rule

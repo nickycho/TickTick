@@ -9,10 +9,15 @@ struct CalendarView: View {
     @Binding var selectedDate: Date?
     @Binding var selectedTask: TaskItem?
     @Query(sort: \TaskItem.order) private var allTasks: [TaskItem]
+    @Environment(\.locale) private var locale
     @State private var displayDate: Date = Date()
     @State private var viewMode: CalendarViewMode = .week
 
-    private let weekdayHeaders = ["日", "一", "二", "三", "四", "五", "六"]
+    private var weekdayHeaders: [String] {
+        let formatter = DateFormatter()
+        formatter.locale = locale
+        return formatter.shortWeekdaySymbols
+    }
     private let columns = Array(repeating: GridItem(.flexible(), spacing: 1), count: 7)
 
     var body: some View {
@@ -44,7 +49,7 @@ struct CalendarView: View {
 
                 HStack(spacing: 0) {
                     ForEach([CalendarViewMode.month, .week], id: \.rawValue) { mode in
-                        Button(mode == .month ? "月" : "週") { viewMode = mode }
+                        Button(mode == .month ? "Month" : "Week") { viewMode = mode }
                             .buttonStyle(.plain)
                             .font(.subheadline)
                             .padding(.horizontal, 10)
@@ -79,7 +84,7 @@ struct CalendarView: View {
             }
         }
         .background(Color(nsColor: .windowBackgroundColor))
-        .navigationTitle("行事曆")
+        .navigationTitle("Calendar")
         .onChange(of: viewMode) { _, _ in
             displayDate = selectedDate ?? Date()
         }
@@ -192,25 +197,19 @@ struct CalendarView: View {
     private var weekRangeTitle: String {
         let days = weekDays
         guard let first = days.first, let last = days.last else { return "" }
-        let cal = Calendar.current
-        let f = DateFormatter()
-        f.locale = Locale(identifier: "zh_TW")
-        if cal.component(.month, from: first) == cal.component(.month, from: last) {
-            f.dateFormat = "yyyy年M月d"
-            let firstStr = f.string(from: first)
-            f.dateFormat = "d日"
-            return "\(firstStr)-\(f.string(from: last))"
-        } else {
-            f.dateFormat = "M月d日"
-            return "\(f.string(from: first)) - \(f.string(from: last))"
-        }
+
+        let formatter = DateFormatter()
+        formatter.locale = locale
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        return "\(formatter.string(from: first)) – \(formatter.string(from: last))"
     }
 
     private func monthTitle(_ date: Date) -> String {
-        let f = DateFormatter()
-        f.locale = Locale(identifier: "zh_TW")
-        f.dateFormat = "yyyy年M月"
-        return f.string(from: date)
+        let formatter = DateFormatter()
+        formatter.locale = locale
+        formatter.setLocalizedDateFormatFromTemplate("yMMMM")
+        return formatter.string(from: date)
     }
 }
 
@@ -224,13 +223,15 @@ struct CalendarWeekDayColumn: View {
     let onDayTap: () -> Void
     let onTaskTap: (TaskItem) -> Void
     @AppStorage("taskFontSize") private var taskFontSize: Double = 14
+    @Environment(\.locale) private var locale
 
     private var chipFontSize: CGFloat { CGFloat(taskFontSize) - 4 }
     private var isToday: Bool { Calendar.current.isDateInToday(date) }
     private var day: Int { Calendar.current.component(.day, from: date) }
     private var weekdayLabel: String {
-        let labels = ["日", "一", "二", "三", "四", "五", "六"]
-        return labels[Calendar.current.component(.weekday, from: date) - 1]
+        let formatter = DateFormatter()
+        formatter.locale = locale
+        return formatter.shortWeekdaySymbols[Calendar.current.component(.weekday, from: date) - 1]
     }
 
     var body: some View {
@@ -360,7 +361,14 @@ struct CalendarDayCell: View {
             }
 
             if tasks.count > 3 {
-                Text("+\(tasks.count - 3) 個")
+                HStack(spacing: 2) {
+                    Text("+")
+                    Text("\(tasks.count - 3)")
+                    Text("more")
+                }
+                .font(.system(size: chipFontSize))
+                .foregroundStyle(.secondary)
+                .padding(.leading, 3)
                     .font(.system(size: chipFontSize))
                     .foregroundStyle(.secondary)
                     .padding(.leading, 3)

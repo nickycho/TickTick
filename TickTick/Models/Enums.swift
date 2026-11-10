@@ -1,6 +1,66 @@
 import SwiftUI
 import SwiftData
 
+enum AppLanguage: String, CaseIterable, Identifiable {
+    case system
+    case english = "en"
+    case traditionalChinese = "zh-Hant"
+    case japanese = "ja"
+    case korean = "ko"
+
+    static let storageKey = "appLanguage"
+
+    var id: String { rawValue }
+
+    var title: LocalizedStringKey {
+        switch self {
+        case .system: return "Follow System"
+        case .english: return "English"
+        case .traditionalChinese: return "Chinese (Traditional)"
+        case .japanese: return "Japanese"
+        case .korean: return "Korean"
+        }
+    }
+
+    var locale: Locale {
+        switch self {
+        case .system:
+            return Locale(identifier: Self.systemLocaleIdentifier())
+        case .english:
+            return Locale(identifier: "en")
+        case .traditionalChinese:
+            return Locale(identifier: "zh-Hant")
+        case .japanese:
+            return Locale(identifier: "ja")
+        case .korean:
+            return Locale(identifier: "ko")
+        }
+    }
+
+    static func locale(for rawValue: String) -> Locale {
+        (AppLanguage(rawValue: rawValue) ?? .system).locale
+    }
+
+    private static func systemLocaleIdentifier() -> String {
+        for preferredLanguage in Locale.preferredLanguages {
+            let languageCode = preferredLanguage
+                .split(separator: "-")
+                .first
+                .map(String.init)?
+                .lowercased()
+
+            switch languageCode {
+            case "en": return "en"
+            case "zh": return "zh-Hant"
+            case "ja": return "ja"
+            case "ko": return "ko"
+            default: continue
+            }
+        }
+        return "en"
+    }
+}
+
 enum Priority: Int, Codable, CaseIterable, Comparable, Hashable {
     case none = 0
     case low = 1
@@ -11,12 +71,12 @@ enum Priority: Int, Codable, CaseIterable, Comparable, Hashable {
         lhs.rawValue < rhs.rawValue
     }
 
-    var label: String {
+    var label: LocalizedStringKey {
         switch self {
-        case .none: return "無"
-        case .low: return "低"
-        case .medium: return "中"
-        case .high: return "高"
+        case .none: return "None"
+        case .low: return "Low"
+        case .medium: return "Medium"
+        case .high: return "High"
         }
     }
 
@@ -35,11 +95,11 @@ enum RecurrenceFrequency: String, Codable, CaseIterable {
     case weekly = "weekly"
     case workdays = "workdays"
 
-    var label: String {
+    var label: LocalizedStringKey {
         switch self {
-        case .daily: return "每天"
-        case .weekly: return "每週"
-        case .workdays: return "每個工作日"
+        case .daily: return "Daily"
+        case .weekly: return "Weekly"
+        case .workdays: return "Every weekday"
         }
     }
 }
@@ -53,13 +113,13 @@ enum SmartListType: String, CaseIterable, Hashable, Identifiable {
 
     var id: String { rawValue }
 
-    var title: String {
+    var title: LocalizedStringKey {
         switch self {
-        case .today: return "今天"
-        case .tomorrow: return "明天"
-        case .next7Days: return "近7天"
-        case .all: return "全部"
-        case .calendar: return "行事曆"
+        case .today: return "Today"
+        case .tomorrow: return "Tomorrow"
+        case .next7Days: return "Next 7 Days"
+        case .all: return "All Tasks"
+        case .calendar: return "Calendar"
         }
     }
 
@@ -98,10 +158,10 @@ enum MissedRecurrenceMode: String, CaseIterable, Identifiable {
 
     var id: String { rawValue }
 
-    var label: String {
+    var label: LocalizedStringKey {
         switch self {
-        case .allMissed: return "逐日補生（每個錯過的日期一筆任務）"
-        case .todayOnly: return "只補生最新一筆"
+        case .allMissed: return "Generate every missed occurrence"
+        case .todayOnly: return "Generate only the latest occurrence"
         }
     }
 }

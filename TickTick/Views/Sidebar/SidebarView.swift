@@ -12,7 +12,7 @@ struct SidebarView: View {
 
     var body: some View {
         List(selection: $selection) {
-            Section("智能列表") {
+            Section("Smart Lists") {
                 ForEach(SmartListType.allCases) { type in
                     Label(type.title, systemImage: type.systemImage)
                         .foregroundStyle(type.color)
@@ -20,7 +20,7 @@ struct SidebarView: View {
                 }
             }
 
-            Section("我的清單") {
+            Section("My Lists") {
                 ForEach(lists) { list in
                     HStack {
                         Circle()
@@ -30,11 +30,11 @@ struct SidebarView: View {
                     }
                     .tag(SidebarSelection.taskList(list.persistentModelID))
                     .contextMenu {
-                        Button("重新命名 / 更改顏色") {
+                        Button("Rename / Change Color") {
                             editingList = list
                         }
                         Divider()
-                        Button("刪除清單", role: .destructive) {
+                        Button("Delete List", role: .destructive) {
                             deleteList(list)
                         }
                     }
@@ -46,7 +46,7 @@ struct SidebarView: View {
                         Circle()
                             .fill(Color(hex: "#4A90E2"))
                             .frame(width: 10, height: 10)
-                        TextField("清單名稱", text: $newListName)
+                        TextField("List Name", text: $newListName)
                             .textFieldStyle(.plain)
                             .onSubmit { commitNewList() }
                             .onExitCommand {
